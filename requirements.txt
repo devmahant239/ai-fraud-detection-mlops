@@ -1,0 +1,10 @@
+kafka-python
+psycopg2-binary
+great_expectations
+dvc
+pandas
+scikit-learn
+mlflow
+fastapi
+uvicorn
+pyyaml
