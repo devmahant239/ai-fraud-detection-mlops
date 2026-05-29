@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - main
+      - develop
+    paths:
+      - "src/**"
+      - "Dockerfile"
+      - "requirements.txt"
+      - ".github/workflows/docker-build-push.yml"
 
 jobs:
   docker-build-push:
@@ -19,8 +25,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Set Docker image tag
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            echo "IMAGE_TAG=latest" >> $GITHUB_ENV
+          else
+            echo "IMAGE_TAG=dev" >> $GITHUB_ENV
+          fi
+
       - name: Build Docker image
-        run: docker build -t dev239/fraud-detection-api:latest .
+        run: docker build -t dev239/fraud-detection-api:${IMAGE_TAG} .
 
       - name: Push Docker image
-        run: docker push dev239/fraud-detection-api:latest
+        run: docker push dev239/fraud-detection-api:${IMAGE_TAG}
