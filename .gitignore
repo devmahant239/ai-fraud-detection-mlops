@@ -16,3 +16,4 @@ data/processed/
 .idea/
 
 *.log
+!src/model_training/fraud_model.pkl
