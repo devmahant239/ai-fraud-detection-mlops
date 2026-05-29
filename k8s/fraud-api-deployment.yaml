@@ -25,5 +25,12 @@ spec:
 
           imagePullPolicy: Always
 
+          envFrom:
+            - configMapRef:
+                name: fraud-api-config
+
+            - secretRef:
+                name: fraud-api-secret
+
           ports:
             - containerPort: 8000
