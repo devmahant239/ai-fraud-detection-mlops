@@ -10,6 +10,7 @@ on:
       - "Dockerfile"
       - "mlruns/**"
       - "requirements.txt"
+      - ".dockerignore"
       - ".github/workflows/docker-build-push.yml"
 
 jobs:
