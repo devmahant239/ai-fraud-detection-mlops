@@ -11,7 +11,11 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 
+
 mlflow.set_tracking_uri("file:./mlruns")
+mlflow.set_experiment("fraud-detection-experiments")
+
+
 df = pd.read_csv("data/processed/transactions_features.csv")
 
 with open("data/processed/transactions_features.csv.dvc") as file:
@@ -42,9 +46,6 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 
-mlflow.set_experiment("fraud-detection-experiments")
-
-
 models = {
     "logistic_regression": LogisticRegression(max_iter=1000),
     "decision_tree": DecisionTreeClassifier(max_depth=5, random_state=42),
@@ -58,11 +59,12 @@ models = {
 best_model = None
 best_model_name = None
 best_f1_score = 0
+best_run_id = None
 
 
 for model_name, model in models.items():
 
-    with mlflow.start_run(run_name=model_name):
+    with mlflow.start_run(run_name=model_name) as run:
 
         model.fit(X_train, y_train)
 
@@ -74,7 +76,6 @@ for model_name, model in models.items():
         f1 = f1_score(y_test, y_pred)
 
         mlflow.log_param("model_name", model_name)
-
         mlflow.log_param("dataset_version", dataset_version)
         mlflow.log_param("dataset_path", "data/processed/transactions_features.csv")
         mlflow.log_param("row_count", len(df))
@@ -87,8 +88,7 @@ for model_name, model in models.items():
 
         mlflow.sklearn.log_model(
             sk_model=model,
-            name=model_name,
-            registered_model_name="fraud_detection_model"
+            name="model"
         )
 
         print(f"\nModel: {model_name}")
@@ -101,7 +101,15 @@ for model_name, model in models.items():
             best_f1_score = f1
             best_model = model
             best_model_name = model_name
+            best_run_id = run.info.run_id
 
+
+model_uri = f"runs:/{best_run_id}/model"
+
+registered_model = mlflow.register_model(
+    model_uri=model_uri,
+    name="fraud_detection_model"
+)
 
 with open("src/model_training/fraud_model.pkl", "wb") as file:
     pickle.dump(best_model, file)
@@ -109,4 +117,7 @@ with open("src/model_training/fraud_model.pkl", "wb") as file:
 
 print(f"\nBest Model: {best_model_name}")
 print(f"Best F1 Score: {best_f1_score}")
+print(f"Best Run ID: {best_run_id}")
+print(f"Registered Model Name: fraud_detection_model")
+print(f"Registered Model Version: {registered_model.version}")
 print("Best model saved at src/model_training/fraud_model.pkl")

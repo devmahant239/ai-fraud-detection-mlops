@@ -1,16 +1,19 @@
-import pickle
+import mlflow.pyfunc
 
 from fastapi import FastAPI
 from pydantic import BaseModel
 from prometheus_fastapi_instrumentator import Instrumentator
 
 
+mlflow.set_tracking_uri("file:./mlruns")
+
+MODEL_URI = "models:/fraud_detection_model@production"
+
 app = FastAPI(title="AI Fraud Detection API")
 Instrumentator().instrument(app).expose(app)
 
 
-with open("src/model_training/fraud_model.pkl", "rb") as file:
-    model = pickle.load(file)
+model = mlflow.pyfunc.load_model(MODEL_URI)
 
 
 class Transaction(BaseModel):
