@@ -1,0 +1,10 @@
+artifact_location: file:///home/dev/dev1091/AI Fraud Detection Platform/mlruns/110466008762444703/models/m-5f24af8dd2bb498db314555f6131687d/artifacts
+creation_timestamp: 1779875317494
+experiment_id: '110466008762444703'
+last_updated_timestamp: 1779875321001
+model_id: m-5f24af8dd2bb498db314555f6131687d
+model_type: null
+name: logistic_regression
+source_run_id: e15c8f19a1ab42e3bbf3c0e7add04e0d
+status: 2
+status_message: null

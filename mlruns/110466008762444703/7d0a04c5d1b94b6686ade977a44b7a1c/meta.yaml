@@ -1,0 +1,14 @@
+artifact_uri: file:///home/dev/dev1091/AI Fraud Detection Platform/mlruns/110466008762444703/7d0a04c5d1b94b6686ade977a44b7a1c/artifacts
+end_time: 1779875337012
+entry_point_name: ''
+experiment_id: '110466008762444703'
+lifecycle_stage: active
+run_id: 7d0a04c5d1b94b6686ade977a44b7a1c
+run_name: gradient_boosting
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1779875334021
+status: 3
+tags: []
+user_id: dev

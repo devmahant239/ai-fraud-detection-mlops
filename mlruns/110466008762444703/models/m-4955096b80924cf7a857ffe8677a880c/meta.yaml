@@ -1,0 +1,10 @@
+artifact_location: file:///home/dev/dev1091/AI Fraud Detection Platform/mlruns/110466008762444703/models/m-4955096b80924cf7a857ffe8677a880c/artifacts
+creation_timestamp: 1780308592198
+experiment_id: '110466008762444703'
+last_updated_timestamp: 1780308594897
+model_id: m-4955096b80924cf7a857ffe8677a880c
+model_type: null
+name: model
+source_run_id: 870e0fd0f6ec4c6da936f64346be5b16
+status: 2
+status_message: null

@@ -1,0 +1,10 @@
+artifact_location: file:///home/dev/dev1091/AI Fraud Detection Platform/mlruns/110466008762444703/models/m-aac364132f204a5a80c7ae27e888e61f/artifacts
+creation_timestamp: 1779875334142
+experiment_id: '110466008762444703'
+last_updated_timestamp: 1779875336968
+model_id: m-aac364132f204a5a80c7ae27e888e61f
+model_type: null
+name: gradient_boosting
+source_run_id: 7d0a04c5d1b94b6686ade977a44b7a1c
+status: 2
+status_message: null

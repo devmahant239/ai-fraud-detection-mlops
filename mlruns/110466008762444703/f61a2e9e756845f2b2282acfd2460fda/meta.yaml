@@ -1,0 +1,14 @@
+artifact_uri: file:///home/dev/dev1091/AI Fraud Detection Platform/mlruns/110466008762444703/f61a2e9e756845f2b2282acfd2460fda/artifacts
+end_time: 1779875324421
+entry_point_name: ''
+experiment_id: '110466008762444703'
+lifecycle_stage: active
+run_id: f61a2e9e756845f2b2282acfd2460fda
+run_name: decision_tree
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1779875321022
+status: 3
+tags: []
+user_id: dev

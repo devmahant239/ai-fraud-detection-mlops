@@ -1,0 +1,16 @@
+creation_timestamp: 1779875330549
+current_stage: None
+deployment_job_state: null
+description: null
+last_updated_timestamp: 1779875330549
+model_id: m-5d979c36a8cd4fa99f0c8b81120d40a1
+name: fraud_detection_model
+run_id: b0db1620129d47028c36916404a7617c
+run_link: null
+source: models:/m-5d979c36a8cd4fa99f0c8b81120d40a1
+status: READY
+status_message: null
+storage_location: file:///home/dev/dev1091/AI Fraud Detection Platform/mlruns/110466008762444703/models/m-5d979c36a8cd4fa99f0c8b81120d40a1/artifacts
+user_id: null
+version: 4
+workspace: default

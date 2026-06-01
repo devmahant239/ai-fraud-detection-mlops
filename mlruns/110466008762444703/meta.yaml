@@ -1,0 +1,8 @@
+artifact_location: file:///home/dev/dev1091/AI Fraud Detection Platform/mlruns/110466008762444703
+creation_time: 1779875317340
+experiment_id: '110466008762444703'
+last_update_time: 1779875317340
+lifecycle_stage: active
+name: fraud-detection-experiments
+trace_location: null
+workspace: default

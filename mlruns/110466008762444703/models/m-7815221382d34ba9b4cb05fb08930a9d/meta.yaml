@@ -1,0 +1,10 @@
+artifact_location: file:///home/dev/dev1091/AI Fraud Detection Platform/mlruns/110466008762444703/models/m-7815221382d34ba9b4cb05fb08930a9d/artifacts
+creation_timestamp: 1779875321068
+experiment_id: '110466008762444703'
+last_updated_timestamp: 1779875324404
+model_id: m-7815221382d34ba9b4cb05fb08930a9d
+model_type: null
+name: decision_tree
+source_run_id: f61a2e9e756845f2b2282acfd2460fda
+status: 2
+status_message: null
