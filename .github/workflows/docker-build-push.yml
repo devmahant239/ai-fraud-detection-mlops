@@ -38,4 +38,5 @@ jobs:
         run: docker build -t dev239/fraud-detection-api:${IMAGE_TAG} .
 
       - name: Push Docker image
-        run: docker push dev239/fraud-detection-api:${IMAGE_TAG}
+        run: docker push dev239/fraud-detection-api:${IMAGE_TAG}# rebuild trigger
+# rebuild trigger
