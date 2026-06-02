@@ -1,0 +1,72 @@
+{
+    "metrics": [
+        {
+            "id": "15e89f895b482f9b84ba7274ed18a106",
+            "metric_name": "DriftedColumnsCount(drift_share=0.5)",
+            "config": {
+                "type": "evidently:metric_v2:DriftedColumnsCount",
+                "drift_share": 0.5
+            },
+            "value": {
+                "count": 2.0,
+                "share": 0.4
+            }
+        },
+        {
+            "id": "3fbadf4ef830ee712c8786bb533753db",
+            "metric_name": "ValueDrift(column=amount,method=K-S p_value,threshold=0.05)",
+            "config": {
+                "type": "evidently:metric_v2:ValueDrift",
+                "column": "amount",
+                "method": "K-S p_value",
+                "threshold": 0.05
+            },
+            "value": 0.0007492486309988297
+        },
+        {
+            "id": "3ad5b67c47fe540243efc10b1e6d1e0a",
+            "metric_name": "ValueDrift(column=failed_attempts,method=chi-square p_value,threshold=0.05)",
+            "config": {
+                "type": "evidently:metric_v2:ValueDrift",
+                "column": "failed_attempts",
+                "method": "chi-square p_value",
+                "threshold": 0.05
+            },
+            "value": 0.34909834373483634
+        },
+        {
+            "id": "bd5ddbbc1c383657b7a36a2fad9a7694",
+            "metric_name": "ValueDrift(column=is_international,method=Z-test p_value,threshold=0.05)",
+            "config": {
+                "type": "evidently:metric_v2:ValueDrift",
+                "column": "is_international",
+                "method": "Z-test p_value",
+                "threshold": 0.05
+            },
+            "value": 0.5683501029113995
+        },
+        {
+            "id": "a4a7c6055e31256a15a9990487f435e8",
+            "metric_name": "ValueDrift(column=high_amount,method=Z-test p_value,threshold=0.05)",
+            "config": {
+                "type": "evidently:metric_v2:ValueDrift",
+                "column": "high_amount",
+                "method": "Z-test p_value",
+                "threshold": 0.05
+            },
+            "value": 0.025627582072664357
+        },
+        {
+            "id": "85ada9fd30884f3dd8d15f3fd0077df6",
+            "metric_name": "ValueDrift(column=risk_score,method=chi-square p_value,threshold=0.05)",
+            "config": {
+                "type": "evidently:metric_v2:ValueDrift",
+                "column": "risk_score",
+                "method": "chi-square p_value",
+                "threshold": 0.05
+            },
+            "value": 0.06592407611118391
+        }
+    ],
+    "tests": []
+}

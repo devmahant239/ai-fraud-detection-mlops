@@ -1,0 +1,27 @@
+{
+    "drift_detected": true,
+    "drifted_features": 1,
+    "total_features": 5,
+    "features": {
+        "amount": {
+            "p_value": 0.0007492486309988297,
+            "drift_detected": true
+        },
+        "failed_attempts": {
+            "p_value": 0.9192275407881849,
+            "drift_detected": false
+        },
+        "is_international": {
+            "p_value": 0.9999348090111906,
+            "drift_detected": false
+        },
+        "high_amount": {
+            "p_value": 0.11422635206638551,
+            "drift_detected": false
+        },
+        "risk_score": {
+            "p_value": 0.5359486962363154,
+            "drift_detected": false
+        }
+    }
+}
