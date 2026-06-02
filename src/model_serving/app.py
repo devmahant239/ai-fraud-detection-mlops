@@ -10,7 +10,7 @@ from prometheus_fastapi_instrumentator import Instrumentator
 
 mlflow.set_tracking_uri("file:./mlruns")
 
-MODEL_URI = "models:/fraud_detection_model@production"
+MODEL_URI = "mlruns/110466008762444703/models/m-d72fa50cd3cb40758d58f40dfb132331/artifacts"
 
 PRODUCTION_DATA_PATH = "data/production/current_transactions.csv"
 

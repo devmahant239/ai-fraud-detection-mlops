@@ -21,7 +21,7 @@ spec:
       containers:
         - name: fraud-api
 
-          image: dev239/fraud-detection-api:latest
+          image: dev239/fraud-detection-api:dev
 
           imagePullPolicy: Always
 
