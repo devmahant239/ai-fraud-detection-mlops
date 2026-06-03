@@ -44,9 +44,8 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef drift_decision_component():\n    import subprocess\n\n    subprocess.run(\n\
-          \        [\"python\", \"src/monitoring/drift_decision.py\"],\n        check=True\n\
-          \    )\n\n"
+          \ *\n\ndef drift_decision_component():\n    import subprocess\n    subprocess.run([\"\
+          python\", \"src/monitoring/drift_decision.py\"], check=True)\n\n"
         image: dev239/fraud-detection-api:dev
     exec-drift-detection-component:
       container:
@@ -74,9 +73,8 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef drift_detection_component():\n    import subprocess\n\n    subprocess.run(\n\
-          \        [\"python\", \"src/monitoring/drift_detection.py\"],\n        check=True\n\
-          \    )\n\n"
+          \ *\n\ndef drift_detection_component():\n    import subprocess\n    subprocess.run([\"\
+          python\", \"src/monitoring/drift_detection.py\"], check=True)\n\n"
         image: dev239/fraud-detection-api:dev
     exec-export-data-component:
       container:
@@ -104,9 +102,8 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef export_data_component():\n    import subprocess\n\n    subprocess.run(\n\
-          \        [\"python\", \"src/data_ingestion/export_db_to_csv.py\"],\n   \
-          \     check=True\n    )\n\n"
+          \ *\n\ndef export_data_component():\n    import subprocess\n    subprocess.run([\"\
+          python\", \"src/data_ingestion/export_db_to_csv.py\"], check=True)\n\n"
         image: dev239/fraud-detection-api:dev
     exec-feature-engineering-component:
       container:
@@ -134,9 +131,9 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef feature_engineering_component():\n    import subprocess\n\n \
-          \   subprocess.run(\n        [\"python\", \"src/feature_engineering/feature_engineering.py\"\
-          ],\n        check=True\n    )\n\n"
+          \ *\n\ndef feature_engineering_component():\n    import subprocess\n   \
+          \ subprocess.run([\"python\", \"src/feature_engineering/feature_engineering.py\"\
+          ], check=True)\n\n"
         image: dev239/fraud-detection-api:dev
     exec-promote-model-component:
       container:
@@ -164,9 +161,8 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef promote_model_component():\n    import subprocess\n\n    subprocess.run(\n\
-          \        [\"python\", \"src/model_registry/promote_model.py\"],\n      \
-          \  check=True\n    )\n\n"
+          \ *\n\ndef promote_model_component():\n    import subprocess\n    subprocess.run([\"\
+          python\", \"src/model_registry/promote_model.py\"], check=True)\n\n"
         image: dev239/fraud-detection-api:dev
     exec-train-model-component:
       container:
@@ -194,9 +190,8 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef train_model_component():\n    import subprocess\n\n    subprocess.run(\n\
-          \        [\"python\", \"src/model_training/train_model.py\"],\n        check=True\n\
-          \    )\n\n"
+          \ *\n\ndef train_model_component():\n    import subprocess\n    subprocess.run([\"\
+          python\", \"src/model_training/train_model.py\"], check=True)\n\n"
         image: dev239/fraud-detection-api:dev
     exec-validate-data-component:
       container:
@@ -224,9 +219,8 @@ deploymentSpec:
 
           '
         - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
-          \ *\n\ndef validate_data_component():\n    import subprocess\n\n    subprocess.run(\n\
-          \        [\"python\", \"src/data_validation/validate_data.py\"],\n     \
-          \   check=True\n    )\n\n"
+          \ *\n\ndef validate_data_component():\n    import subprocess\n    subprocess.run([\"\
+          python\", \"src/data_validation/validate_data.py\"], check=True)\n\n"
         image: dev239/fraud-detection-api:dev
 pipelineInfo:
   description: End-to-end MLOps pipeline for fraud detection
