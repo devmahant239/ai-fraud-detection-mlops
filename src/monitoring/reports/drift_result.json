@@ -4,23 +4,23 @@
     "total_features": 5,
     "features": {
         "amount": {
-            "p_value": 0.0007492486309988297,
+            "p_value": 0.004412018758923718,
             "drift_detected": true
         },
         "failed_attempts": {
-            "p_value": 0.9192275407881849,
+            "p_value": 0.959277282555894,
             "drift_detected": false
         },
         "is_international": {
-            "p_value": 0.9999348090111906,
+            "p_value": 0.9459383638149491,
             "drift_detected": false
         },
         "high_amount": {
-            "p_value": 0.11422635206638551,
+            "p_value": 0.4215917278750577,
             "drift_detected": false
         },
         "risk_score": {
-            "p_value": 0.5359486962363154,
+            "p_value": 0.42859038055241555,
             "drift_detected": false
         }
     }

@@ -1,0 +1,299 @@
+# PIPELINE DEFINITION
+# Name: ai-fraud-detection-mlops-pipeline
+# Description: End-to-end MLOps pipeline for fraud detection
+components:
+  comp-drift-decision-component:
+    executorLabel: exec-drift-decision-component
+  comp-drift-detection-component:
+    executorLabel: exec-drift-detection-component
+  comp-export-data-component:
+    executorLabel: exec-export-data-component
+  comp-feature-engineering-component:
+    executorLabel: exec-feature-engineering-component
+  comp-promote-model-component:
+    executorLabel: exec-promote-model-component
+  comp-train-model-component:
+    executorLabel: exec-train-model-component
+  comp-validate-data-component:
+    executorLabel: exec-validate-data-component
+deploymentSpec:
+  executors:
+    exec-drift-decision-component:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - drift_decision_component
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.16.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef drift_decision_component():\n    import subprocess\n\n    subprocess.run(\n\
+          \        [\"python\", \"src/monitoring/drift_decision.py\"],\n        check=True\n\
+          \    )\n\n"
+        image: dev239/fraud-detection-api:dev
+    exec-drift-detection-component:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - drift_detection_component
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.16.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef drift_detection_component():\n    import subprocess\n\n    subprocess.run(\n\
+          \        [\"python\", \"src/monitoring/drift_detection.py\"],\n        check=True\n\
+          \    )\n\n"
+        image: dev239/fraud-detection-api:dev
+    exec-export-data-component:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - export_data_component
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.16.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef export_data_component():\n    import subprocess\n\n    subprocess.run(\n\
+          \        [\"python\", \"src/data_ingestion/export_db_to_csv.py\"],\n   \
+          \     check=True\n    )\n\n"
+        image: dev239/fraud-detection-api:dev
+    exec-feature-engineering-component:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - feature_engineering_component
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.16.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef feature_engineering_component():\n    import subprocess\n\n \
+          \   subprocess.run(\n        [\"python\", \"src/feature_engineering/feature_engineering.py\"\
+          ],\n        check=True\n    )\n\n"
+        image: dev239/fraud-detection-api:dev
+    exec-promote-model-component:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - promote_model_component
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.16.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef promote_model_component():\n    import subprocess\n\n    subprocess.run(\n\
+          \        [\"python\", \"src/model_registry/promote_model.py\"],\n      \
+          \  check=True\n    )\n\n"
+        image: dev239/fraud-detection-api:dev
+    exec-train-model-component:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - train_model_component
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.16.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef train_model_component():\n    import subprocess\n\n    subprocess.run(\n\
+          \        [\"python\", \"src/model_training/train_model.py\"],\n        check=True\n\
+          \    )\n\n"
+        image: dev239/fraud-detection-api:dev
+    exec-validate-data-component:
+      container:
+        args:
+        - --executor_input
+        - '{{$}}'
+        - --function_to_execute
+        - validate_data_component
+        command:
+        - sh
+        - -c
+        - "\nif ! [ -x \"$(command -v pip)\" ]; then\n    python3 -m ensurepip ||\
+          \ python3 -m ensurepip --user || apt-get install python3-pip\nfi\n\nPIP_DISABLE_PIP_VERSION_CHECK=1\
+          \ python3 -m pip install --quiet --no-warn-script-location 'kfp==2.16.1'\
+          \ '--no-deps' 'typing-extensions>=3.7.4,<5; python_version<\"3.9\"' && \"\
+          $0\" \"$@\"\n"
+        - sh
+        - -ec
+        - 'program_path=$(mktemp -d)
+
+
+          printf "%s" "$0" > "$program_path/ephemeral_component.py"
+
+          _KFP_RUNTIME=true python3 -m kfp.dsl.executor_main                         --component_module_path                         "$program_path/ephemeral_component.py"                         "$@"
+
+          '
+        - "\nimport kfp\nfrom kfp import dsl\nfrom kfp.dsl import *\nfrom typing import\
+          \ *\n\ndef validate_data_component():\n    import subprocess\n\n    subprocess.run(\n\
+          \        [\"python\", \"src/data_validation/validate_data.py\"],\n     \
+          \   check=True\n    )\n\n"
+        image: dev239/fraud-detection-api:dev
+pipelineInfo:
+  description: End-to-end MLOps pipeline for fraud detection
+  name: ai-fraud-detection-mlops-pipeline
+root:
+  dag:
+    tasks:
+      drift-decision-component:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-drift-decision-component
+        dependentTasks:
+        - drift-detection-component
+        taskInfo:
+          name: drift-decision-component
+      drift-detection-component:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-drift-detection-component
+        dependentTasks:
+        - promote-model-component
+        taskInfo:
+          name: drift-detection-component
+      export-data-component:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-export-data-component
+        taskInfo:
+          name: export-data-component
+      feature-engineering-component:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-feature-engineering-component
+        dependentTasks:
+        - validate-data-component
+        taskInfo:
+          name: feature-engineering-component
+      promote-model-component:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-promote-model-component
+        dependentTasks:
+        - train-model-component
+        taskInfo:
+          name: promote-model-component
+      train-model-component:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-train-model-component
+        dependentTasks:
+        - feature-engineering-component
+        taskInfo:
+          name: train-model-component
+      validate-data-component:
+        cachingOptions:
+          enableCache: true
+        componentRef:
+          name: comp-validate-data-component
+        dependentTasks:
+        - export-data-component
+        taskInfo:
+          name: validate-data-component
+schemaVersion: 2.1.0
+sdkVersion: kfp-2.16.1
